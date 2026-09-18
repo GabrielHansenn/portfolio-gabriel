@@ -44,7 +44,7 @@ export const socialLinks: SocialLink[] = [
   { label: "GitHub", url: "https://github.com/GabrielHansenn/", icon: "github" },
   {
     label: "LinkedIn",
-    url: "https://www.linkedin.com/in/gabriel-hansen-661494397?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+    url: "https://www.linkedin.com/in/gabriel-hansen-661494397",
     icon: "linkedin",
   },
   {
