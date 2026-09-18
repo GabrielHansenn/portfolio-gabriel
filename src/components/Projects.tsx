@@ -1,39 +1,44 @@
 import { useMemo, useState } from "react";
 import { projects, type ProjectCategory } from "../content/portfolioData";
+import { useLanguage } from "../i18n/LanguageContext";
 import { ProjectCard } from "./ProjectCard";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
-type FilterValue = "Todos" | ProjectCategory;
+type FilterValue = "all" | ProjectCategory;
 
 export function Projects() {
-  const [filter, setFilter] = useState<FilterValue>("Todos");
+  const { t } = useLanguage();
+  const [filter, setFilter] = useState<FilterValue>("all");
 
   const filters: FilterValue[] = useMemo(
-    () => ["Todos", ...new Set(projects.flatMap((p) => p.categories))],
+    () => ["all", ...new Set(projects.flatMap((p) => p.categories))],
     []
   );
 
   const visibleProjects = useMemo(
-    () =>
-      filter === "Todos" ? projects : projects.filter((p) => p.categories.includes(filter)),
+    () => (filter === "all" ? projects : projects.filter((p) => p.categories.includes(filter))),
     [filter]
   );
+
+  function filterLabel(value: FilterValue) {
+    return value === "all" ? t.projects.filterAll : t.projects.category[value];
+  }
 
   return (
     <section id="projetos" className="scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
-            eyebrow="Projetos"
-            title="Trabalhos selecionados"
-            description="Uma seleção de sites desenvolvidos em WordPress com Elementor e código customizado."
+            eyebrow={t.projects.eyebrow}
+            title={t.projects.title}
+            description={t.projects.description}
           />
         </div>
 
         {filters.length > 2 && (
           <Reveal delay={80}>
-            <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filtrar projetos por categoria">
+            <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label={t.projects.filterAriaLabel}>
               {filters.map((item) => {
                 const isActive = filter === item;
                 return (
@@ -48,7 +53,7 @@ export function Projects() {
                         : "border-(--color-border-strong) text-(--color-text-secondary) hover:border-(--color-accent) hover:text-(--color-accent)"
                     }`}
                   >
-                    {item}
+                    {filterLabel(item)}
                   </button>
                 );
               })}
@@ -65,9 +70,7 @@ export function Projects() {
         </div>
 
         {visibleProjects.length === 0 && (
-          <p className="mt-10 text-center text-(--color-text-secondary)">
-            Nenhum projeto nesta categoria ainda.
-          </p>
+          <p className="mt-10 text-center text-(--color-text-secondary)">{t.projects.noResults}</p>
         )}
       </div>
     </section>

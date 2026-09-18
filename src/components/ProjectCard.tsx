@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "../content/portfolioData";
+import { useLanguage } from "../i18n/LanguageContext";
 import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
 import { ExternalLinkIcon, GithubIcon } from "./icons";
 import { Lightbox } from "./Lightbox";
@@ -11,6 +12,9 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { t, pick } = useLanguage();
+  const title = pick(project.title);
+  const description = pick(project.description);
   const images = project.images;
   const hasMultiple = images.length > 1;
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -46,12 +50,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <button
               type="button"
               onClick={() => setIsLightboxOpen(true)}
-              aria-label={`Ampliar imagens do projeto ${project.title}`}
+              aria-label={t.projects.galleryAriaLabel(title)}
               className="block h-full w-full cursor-zoom-in"
             >
               <img
                 src={images[previewIndex]}
-                alt={`Prévia do projeto ${project.title}`}
+                alt={t.projects.previewAlt(title)}
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -62,7 +66,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,var(--color-surface-2),var(--color-surface))]"
             >
               <span className="font-display text-4xl font-bold text-(--color-accent)/20">
-                {project.title.replace(/[[\]]/g, "").charAt(0)}
+                {title.replace(/[[\]]/g, "").charAt(0)}
               </span>
             </div>
           )}
@@ -73,7 +77,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 key={category}
                 className="rounded-full bg-(--color-bg)/80 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-(--color-accent) backdrop-blur"
               >
-                {category}
+                {t.projects.category[category]}
               </span>
             ))}
           </div>
@@ -82,7 +86,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <div
               className="absolute inset-x-0 bottom-3 flex justify-center gap-1.5"
               role="group"
-              aria-label="Selecionar prévia"
+              aria-label={t.projects.selectPreviewAriaLabel}
             >
               {images.map((image, i) => (
                 <button
@@ -92,7 +96,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                     event.stopPropagation();
                     setPreviewIndex(i);
                   }}
-                  aria-label={`Mostrar prévia ${i + 1}`}
+                  aria-label={t.projects.showPreviewAriaLabel(i + 1)}
                   aria-current={i === previewIndex}
                   className={`h-1.5 rounded-full transition-all duration-200 ${
                     i === previewIndex
@@ -106,11 +110,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="font-display text-lg font-semibold text-(--color-text)">
-            {project.title}
-          </h3>
+          <h3 className="font-display text-lg font-semibold text-(--color-text)">{title}</h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-(--color-text-secondary)">
-            {project.description}
+            {description}
           </p>
 
           <ul className="mt-4 flex flex-wrap gap-2">
@@ -133,7 +135,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-(--color-text) transition-colors hover:text-(--color-accent)"
               >
                 <ExternalLinkIcon width={16} height={16} />
-                Ver projeto
+                {t.projects.viewProject}
               </a>
             )}
             {project.repoUrl && (
@@ -144,7 +146,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-(--color-text-secondary) transition-colors hover:text-(--color-accent)"
               >
                 <GithubIcon width={16} height={16} />
-                Repositório
+                {t.projects.repo}
               </a>
             )}
           </div>
@@ -155,7 +157,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <Lightbox
           images={images}
           index={previewIndex}
-          title={project.title}
+          title={title}
           onClose={() => setIsLightboxOpen(false)}
           onNavigate={setPreviewIndex}
         />

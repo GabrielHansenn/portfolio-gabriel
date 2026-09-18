@@ -1,8 +1,11 @@
 import { profile } from "../content/portfolioData";
+import { useLanguage } from "../i18n/LanguageContext";
 import { ArrowDownIcon } from "./icons";
 import { Reveal } from "./Reveal";
 
 export function Hero() {
+  const { t, pick } = useLanguage();
+
   return (
     <section
       id="topo"
@@ -21,20 +24,20 @@ export function Hero() {
         <div>
           <Reveal delay={80}>
             <h1 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.1] tracking-tight text-(--color-text) sm:text-5xl lg:text-6xl">
-              Olá, eu sou{" "}
+              {t.hero.greetingPrefix}{" "}
               <span className="text-(--color-accent)">{profile.name}</span>
             </h1>
           </Reveal>
 
           <Reveal delay={150}>
             <p className="mt-4 text-xl font-medium text-(--color-text-secondary) sm:text-2xl">
-              {profile.role}
+              {pick(profile.role)}
             </p>
           </Reveal>
 
           <Reveal delay={220}>
             <p className="mt-6 max-w-xl text-balance text-base leading-relaxed text-(--color-text-secondary) sm:text-lg">
-              {profile.tagline}
+              {pick(profile.tagline)}
             </p>
           </Reveal>
 
@@ -44,13 +47,13 @@ export function Hero() {
                 href="#projetos"
                 className="inline-flex items-center justify-center rounded-full bg-(--color-accent) px-7 py-3.5 text-sm font-semibold text-(--color-accent-ink) transition-all duration-200 hover:bg-(--color-accent-hover) hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_var(--color-accent)] active:translate-y-0"
               >
-                Ver projetos
+                {t.hero.ctaProjects}
               </a>
               <a
                 href="#contato"
                 className="inline-flex items-center justify-center rounded-full border border-(--color-border-strong) px-7 py-3.5 text-sm font-semibold text-(--color-text) transition-all duration-200 hover:border-(--color-accent) hover:text-(--color-accent) hover:-translate-y-0.5 active:translate-y-0"
               >
-                Entrar em contato
+                {t.hero.ctaContact}
               </a>
             </div>
           </Reveal>
@@ -62,7 +65,7 @@ export function Hero() {
               {profile.avatar ? (
                 <img
                   src={profile.avatar}
-                  alt={`Foto de ${profile.name}`}
+                  alt={t.hero.avatarAlt(profile.name)}
                   className="h-full w-full object-cover"
                 />
               ) : (
@@ -81,9 +84,9 @@ export function Hero() {
       <a
         href="#sobre"
         className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-(--color-text-muted) transition-colors hover:text-(--color-accent) sm:flex"
-        aria-label="Rolar para a próxima seção"
+        aria-label={t.hero.scrollAriaLabel}
       >
-        <span className="text-xs uppercase tracking-widest">Rolar</span>
+        <span className="text-xs uppercase tracking-widest">{t.hero.scrollLabel}</span>
         <ArrowDownIcon className="animate-bounce" />
       </a>
     </section>

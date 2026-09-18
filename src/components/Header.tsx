@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { profile } from "../content/portfolioData";
+import { useLanguage } from "../i18n/LanguageContext";
 import { CloseIcon, MenuIcon } from "./icons";
-
-const NAV_LINKS = [
-  { href: "#sobre", label: "Sobre" },
-  { href: "#habilidades", label: "Habilidades" },
-  { href: "#projetos", label: "Projetos" },
-  { href: "#experiencia", label: "Experiência" },
-  { href: "#contato", label: "Contato" },
-];
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function Header() {
+  const { t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: "#sobre", label: t.nav.about },
+    { href: "#habilidades", label: t.nav.skills },
+    { href: "#projetos", label: t.nav.projects },
+    { href: "#experiencia", label: t.nav.experience },
+    { href: "#contato", label: t.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -38,7 +41,7 @@ export function Header() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 sm:px-8">
         <a
           href="#topo"
           className="font-display text-lg font-semibold tracking-tight text-(--color-text) hover:text-(--color-accent) transition-colors"
@@ -47,9 +50,9 @@ export function Header() {
           <span className="text-(--color-accent)">.</span>
         </a>
 
-        <nav className="hidden md:block" aria-label="Navegação principal">
+        <nav className="hidden md:block" aria-label={t.nav.desktopNavAriaLabel}>
           <ul className="flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -62,31 +65,37 @@ export function Header() {
           </ul>
         </nav>
 
-        <a
-          href="#contato"
-          className="hidden md:inline-flex items-center rounded-full bg-(--color-accent) px-5 py-2 text-sm font-semibold text-(--color-accent-ink) transition-all duration-200 hover:bg-(--color-accent-hover) hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_var(--color-accent)]"
-        >
-          Vamos conversar
-        </a>
+        <div className="hidden items-center gap-4 md:flex">
+          <LanguageSwitcher />
+          <a
+            href="#contato"
+            className="inline-flex items-center rounded-full bg-(--color-accent) px-5 py-2 text-sm font-semibold text-(--color-accent-ink) transition-all duration-200 hover:bg-(--color-accent-hover) hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_var(--color-accent)]"
+          >
+            {t.nav.cta}
+          </a>
+        </div>
 
-        <button
-          type="button"
-          onClick={() => setIsMenuOpen((v) => !v)}
-          className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--color-border-strong) text-(--color-text) transition-colors hover:border-(--color-accent) hover:text-(--color-accent)"
-          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <LanguageSwitcher />
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((v) => !v)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-(--color-border-strong) text-(--color-text) transition-colors hover:border-(--color-accent) hover:text-(--color-accent)"
+            aria-label={isMenuOpen ? t.nav.closeMenuAriaLabel : t.nav.openMenuAriaLabel}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
       </div>
 
       {isMenuOpen && (
         <nav
           className="md:hidden border-t border-(--color-border) bg-(--color-bg)"
-          aria-label="Navegação móvel"
+          aria-label={t.nav.mobileNavAriaLabel}
         >
           <ul className="flex flex-col px-5 py-4 animate-menu-in">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
@@ -103,7 +112,7 @@ export function Header() {
                 onClick={closeMenu}
                 className="block rounded-full bg-(--color-accent) px-5 py-3 text-center text-base font-semibold text-(--color-accent-ink)"
               >
-                Vamos conversar
+                {t.nav.cta}
               </a>
             </li>
           </ul>

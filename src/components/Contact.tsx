@@ -1,16 +1,19 @@
 import { profile, socialLinks } from "../content/portfolioData";
+import { useLanguage } from "../i18n/LanguageContext";
 import { socialIconMap } from "./icons";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
 export function Contact() {
+  const { t } = useLanguage();
+
   return (
     <section id="contato" className="scroll-mt-24 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow="Contato"
-          title="Vamos construir algo juntos?"
-          description="Me chame diretamente por um dos canais abaixo."
+          eyebrow={t.contact.eyebrow}
+          title={t.contact.title}
+          description={t.contact.description}
           align="center"
         />
 
@@ -19,9 +22,10 @@ export function Contact() {
             {socialLinks.map((social) => {
               const Icon = socialIconMap[social.icon];
               const isEmail = social.icon === "email";
+              const label = t.social[social.icon];
               return (
                 <a
-                  key={social.label}
+                  key={social.icon}
                   href={social.url}
                   target={isEmail ? undefined : "_blank"}
                   rel="noopener noreferrer"
@@ -31,11 +35,9 @@ export function Contact() {
                     <Icon />
                   </span>
                   <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-wide text-(--color-text-muted)">
-                      {social.label}
-                    </p>
+                    <p className="text-xs uppercase tracking-wide text-(--color-text-muted)">{label}</p>
                     <p className="truncate font-medium text-(--color-text)">
-                      {isEmail ? profile.email : social.label}
+                      {isEmail ? profile.email : label}
                     </p>
                   </div>
                 </a>
