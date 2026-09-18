@@ -1,4 +1,9 @@
-import type { Localized } from "../i18n/translations";
+import type { Locale, Localized } from "../i18n/translations";
+
+/** Resolve um campo que pode ser texto simples ou bilíngue ({ pt, en }). */
+export function resolveLocalizedUrl(url: string | Localized<string>, locale: Locale): string {
+  return typeof url === "string" ? url : url[locale];
+}
 
 /**
  * Conteúdo central do portfólio.
@@ -57,18 +62,33 @@ export const profile: Profile = {
 export type SocialIcon = "github" | "linkedin" | "whatsapp" | "email" | "dribbble" | "twitter";
 
 export interface SocialLink {
-  url: string;
+  /**
+   * URL do link. Pode ser um texto simples (mesmo link nos dois idiomas)
+   * ou um objeto { pt, en } quando a URL muda por idioma — como no
+   * WhatsApp, cuja mensagem pré-preenchida é traduzida.
+   */
+  url: string | Localized<string>;
   icon: SocialIcon;
+  /** Texto exibido no card de contato (usuário, número, e-mail etc). */
+  value: string;
 }
 
 export const socialLinks: SocialLink[] = [
-  { url: "https://github.com/GabrielHansenn/", icon: "github" },
-  { url: "https://www.linkedin.com/in/gabriel-hansen-661494397", icon: "linkedin" },
+  { url: "https://github.com/GabrielHansenn/", icon: "github", value: "GabrielHansenn" },
   {
-    url: "https://wa.me/5542999616917?text=Oi%2C%20Gabriel!%20Encontrei%20seu%20portf%C3%B3lio%20e%20me%20interessei%20pelo%20seu%20trabalho.%20Podemos%20conversar%20sobre%20um%20projeto%3F",
-    icon: "whatsapp",
+    url: "https://www.linkedin.com/in/gabriel-hansen-661494397",
+    icon: "linkedin",
+    value: "Gabriel Hansen",
   },
-  { url: "mailto:gabriel.hansen2005@gmail.com", icon: "email" },
+  {
+    url: {
+      pt: "https://wa.me/5542999616917?text=Oi%2C%20Gabriel!%20Encontrei%20seu%20portf%C3%B3lio%20e%20me%20interessei%20pelo%20seu%20trabalho.%20Podemos%20conversar%20sobre%20um%20projeto%3F",
+      en: "https://wa.me/5542999616917?text=Hi%20Gabriel!%20I%20came%20across%20your%20portfolio%20and%20I'm%20really%20interested%20in%20your%20work.%20Could%20we%20chat%20about%20a%20project%3F",
+    },
+    icon: "whatsapp",
+    value: "(42) 99961-6917",
+  },
+  { url: "mailto:gabriel.hansen2005@gmail.com", icon: "email", value: "gabriel.hansen2005@gmail.com" },
 ];
 
 export interface SkillGroup {

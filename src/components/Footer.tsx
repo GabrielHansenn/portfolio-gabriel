@@ -1,9 +1,9 @@
-import { profile, socialLinks } from "../content/portfolioData";
+import { profile, resolveLocalizedUrl, socialLinks } from "../content/portfolioData";
 import { useLanguage } from "../i18n/LanguageContext";
 import { socialIconMap } from "./icons";
 
 export function Footer() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
@@ -20,7 +20,7 @@ export function Footer() {
             return (
               <li key={social.icon}>
                 <a
-                  href={social.url}
+                  href={resolveLocalizedUrl(social.url, locale)}
                   target={social.icon === "email" ? undefined : "_blank"}
                   rel="noopener noreferrer"
                   aria-label={label}
