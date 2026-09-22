@@ -60,14 +60,16 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={200} className="flex justify-center lg:-mb-8 lg:self-end lg:justify-end">
+        {/* min-w-0 impede a foto de esticar a coluna e espremer o texto; o
+            que passar da coluna sangra para a direita, sem empurrar nada. */}
+        <Reveal delay={200} className="flex min-w-0 justify-center lg:-mb-20 lg:self-end lg:justify-start">
           {profile.avatar ? (
             <img
               src={profile.avatar}
               alt={t.hero.avatarAlt(profile.name)}
               /* A máscara dissolve a base da foto no fundo, para o recorte
                  não terminar num corte reto. */
-              className="hero-photo w-full max-w-[18rem] object-contain object-bottom sm:max-w-sm lg:max-h-[68vh] lg:w-auto lg:max-w-none"
+              className="hero-photo w-full max-w-[18rem] object-contain object-bottom sm:max-w-sm lg:max-h-[54vh] lg:w-auto lg:max-w-none"
             />
           ) : (
             <div className="flex aspect-square w-full max-w-xs items-center justify-center rounded-[2rem] border border-(--color-border-strong) bg-(--color-surface) lg:max-w-sm">
