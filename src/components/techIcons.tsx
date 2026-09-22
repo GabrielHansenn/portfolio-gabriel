@@ -74,7 +74,7 @@ function monogramIcon(initials: string, title: string) {
           fill="currentColor"
           fontSize={initials.length > 1 ? 9 : 12}
           fontWeight="700"
-          fontFamily="Inter, system-ui, sans-serif"
+          fontFamily="Google Sans Flex, system-ui, sans-serif"
         >
           {initials}
         </text>
