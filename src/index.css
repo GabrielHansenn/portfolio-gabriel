@@ -56,6 +56,15 @@
       transform: translateY(0);
     }
   }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @layer base {
@@ -111,6 +120,33 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* A foto recortada some aos poucos na base, em vez de terminar num corte
+     reto contra o fundo. */
+  .hero-photo {
+    mask-image: linear-gradient(to bottom, #000 72%, transparent 99%);
+  }
+
+  /* Faixa com rolagem infinita: o conteúdo é duplicado e o trilho anda
+     metade da própria largura, o que faz o loop emendar sem salto. */
+  .marquee {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+
+  .marquee-track {
+    animation: marquee var(--marquee-duration, 45s) linear infinite;
+  }
+
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -128,5 +164,15 @@
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  /* Sem movimento automático: a faixa fica parada e o usuário rola na mão. */
+  .marquee {
+    overflow-x: auto;
+  }
+
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
   }
 }

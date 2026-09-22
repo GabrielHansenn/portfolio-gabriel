@@ -72,14 +72,6 @@ export function ExternalLinkIcon(props: IconProps) {
   );
 }
 
-export function ArrowDownIcon(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M12 4v16m0 0-6-6m6 6 6-6" />
-    </svg>
-  );
-}
-
 export function MenuIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

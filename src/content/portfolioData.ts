@@ -1,3 +1,4 @@
+import type { TechIcon } from "../components/techIcons";
 import type { Locale, Localized } from "../i18n/translations";
 
 /** Resolve um campo que pode ser texto simples ou bilíngue ({ pt, en }). */
@@ -56,7 +57,7 @@ export const profile: Profile = {
   },
   email: "gabriel.hansen2005@gmail.com",
   resumeUrl: "#",
-  avatar: "/avatar.jpg",
+  avatar: "/avatar.webp",
 };
 
 export type SocialIcon = "github" | "linkedin" | "whatsapp" | "email" | "dribbble" | "twitter";
@@ -89,6 +90,33 @@ export const socialLinks: SocialLink[] = [
     value: "(42) 99961-6917",
   },
   { url: "mailto:gabriel.hansen2005@gmail.com", icon: "email", value: "gabriel.hansen2005@gmail.com" },
+];
+
+/**
+ * Tecnologias exibidas na faixa rolante logo abaixo da Hero.
+ * `icon` precisa existir em techIconMap (src/components/techIcons.tsx);
+ * para adicionar uma tecnologia nova, cadastre o ícone lá antes.
+ */
+export interface Technology {
+  name: string;
+  icon: TechIcon;
+}
+
+export const technologies: Technology[] = [
+  { name: "HTML5", icon: "html" },
+  { name: "CSS3", icon: "css" },
+  { name: "JavaScript", icon: "javascript" },
+  { name: "TypeScript", icon: "typescript" },
+  { name: "PHP", icon: "php" },
+  { name: "React", icon: "react" },
+  { name: "Node.js", icon: "node" },
+  { name: "WordPress", icon: "wordpress" },
+  { name: "SQL", icon: "sql" },
+  { name: "Git", icon: "git" },
+  { name: "GitHub", icon: "github" },
+  { name: "Elementor", icon: "elementor" },
+  { name: "Divi", icon: "divi" },
+  { name: "Beaver Builder", icon: "beaver" },
 ];
 
 export interface SkillGroup {

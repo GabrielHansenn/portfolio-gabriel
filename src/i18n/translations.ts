@@ -37,9 +37,10 @@ interface Dictionary {
     greetingPrefix: string;
     ctaProjects: string;
     ctaContact: string;
-    scrollLabel: string;
-    scrollAriaLabel: string;
     avatarAlt: (name: string) => string;
+  };
+  tech: {
+    ariaLabel: string;
   };
   about: {
     eyebrow: string;
@@ -131,9 +132,10 @@ export const translations: Localized<Dictionary> = {
       greetingPrefix: "Olá, eu sou",
       ctaProjects: "Ver projetos",
       ctaContact: "Entrar em contato",
-      scrollLabel: "Rolar",
-      scrollAriaLabel: "Rolar para a próxima seção",
       avatarAlt: (name) => `Foto de ${name}`,
+    },
+    tech: {
+      ariaLabel: "Tecnologias que utilizo",
     },
     about: {
       eyebrow: "Sobre mim",
@@ -229,9 +231,10 @@ export const translations: Localized<Dictionary> = {
       greetingPrefix: "Hi, I'm",
       ctaProjects: "View projects",
       ctaContact: "Get in touch",
-      scrollLabel: "Scroll",
-      scrollAriaLabel: "Scroll to next section",
       avatarAlt: (name) => `Photo of ${name}`,
+    },
+    tech: {
+      ariaLabel: "Technologies I work with",
     },
     about: {
       eyebrow: "About me",

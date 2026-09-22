@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Projects } from "./components/Projects";
 import { Skills } from "./components/Skills";
+import { TechMarquee } from "./components/TechMarquee";
 import { useLanguage } from "./i18n/LanguageContext";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 
       <main id="conteudo">
         <Hero />
+        <TechMarquee />
         <About />
         <Skills />
         <Projects />

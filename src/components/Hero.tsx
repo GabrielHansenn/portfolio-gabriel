@@ -1,15 +1,16 @@
 import { profile } from "../content/portfolioData";
 import { useLanguage } from "../i18n/LanguageContext";
-import { ArrowDownIcon } from "./icons";
 import { Reveal } from "./Reveal";
 
 export function Hero() {
   const { t, pick } = useLanguage();
 
+  // A altura mínima desconta o header fixo (5rem): sem isso o espaço dele
+  // entra duas vezes na conta e sobra um vão grande antes da próxima seção.
   return (
     <section
       id="topo"
-      className="relative flex min-h-dvh items-center overflow-hidden pt-24 pb-16"
+      className="relative flex min-h-[calc(100dvh-5rem)] items-center overflow-hidden pt-24 pb-24 lg:pb-8"
     >
       <div
         aria-hidden="true"
@@ -59,36 +60,24 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <Reveal delay={200}>
-          <div className="relative mx-auto aspect-square w-full max-w-xs lg:max-w-sm">
-            <div className="absolute inset-0 overflow-hidden rounded-[2rem] border border-(--color-border-strong) bg-(--color-surface)">
-              {profile.avatar ? (
-                <img
-                  src={profile.avatar}
-                  alt={t.hero.avatarAlt(profile.name)}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center">
-                  <span className="font-display text-8xl font-bold text-(--color-accent)/25">
-                    {profile.name !== "[SEU NOME]" ? profile.name.charAt(0) : "?"}
-                  </span>
-                </div>
-              )}
+        <Reveal delay={200} className="flex justify-center lg:-mb-8 lg:self-end lg:justify-end">
+          {profile.avatar ? (
+            <img
+              src={profile.avatar}
+              alt={t.hero.avatarAlt(profile.name)}
+              /* A máscara dissolve a base da foto no fundo, para o recorte
+                 não terminar num corte reto. */
+              className="hero-photo w-full max-w-[18rem] object-contain object-bottom sm:max-w-sm lg:max-h-[68vh] lg:w-auto lg:max-w-none"
+            />
+          ) : (
+            <div className="flex aspect-square w-full max-w-xs items-center justify-center rounded-[2rem] border border-(--color-border-strong) bg-(--color-surface) lg:max-w-sm">
+              <span className="font-display text-8xl font-bold text-(--color-accent)/25">
+                {profile.name !== "[SEU NOME]" ? profile.name.charAt(0) : "?"}
+              </span>
             </div>
-            <div className="pointer-events-none absolute inset-6 rounded-[1.5rem] border border-dashed border-(--color-accent)/40" />
-          </div>
+          )}
         </Reveal>
       </div>
-
-      <a
-        href="#sobre"
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-(--color-text-muted) transition-colors hover:text-(--color-accent) sm:flex"
-        aria-label={t.hero.scrollAriaLabel}
-      >
-        <span className="text-xs uppercase tracking-widest">{t.hero.scrollLabel}</span>
-        <ArrowDownIcon className="animate-bounce" />
-      </a>
     </section>
   );
 }
