@@ -249,6 +249,18 @@ export const projects: Project[] = [
     tags: ["WordPress", "Elementor", "PHP"],
     liveUrl: "http://devcrabbeserv.wpengine.com/",
   },
+  {
+    id: "florida-track-club",
+    title: { pt: "Florida Track Club", en: "Florida Track Club" },
+    description: {
+      pt: "Site para um clube de corrida sem fins lucrativos de Gainesville (FL), ativo desde 1965, com programas, calendário de provas, resultados e captação de novos membros.",
+      en: "Website for a nonprofit running club in Gainesville, FL, active since 1965, featuring programs, a race calendar, results and new member sign-ups.",
+    },
+    images: ["/projects/florida-track-club.png"],
+    categories: ["web"],
+    tags: ["WordPress", "Elementor", "PHP"],
+    liveUrl: "https://thefloridatrackclub.com/",
+  },
 ];
 
 export interface Experience {
