@@ -41,14 +41,14 @@ export const profile: Profile = {
   },
   bio: {
     pt: [
-      "Sou Gabriel Hansen e vou te acompanhar em todo o processo, do início ao fim.",
-      "Atualmente trabalho como WordPress e PHP Developer, e o meu papel é tirar a sua ideia do papel e colocá-la no ar. Acredito em projetos que fogem do comum. Um bom site não é só bonito. Ele funciona, converte e representa quem você é.",
-      "Meu trabalho fala por si. Reserve um momento para conferir alguns dos projetos que já realizei.",
+      "Sou Gabriel Hansen, desenvolvedor web de Guarapuava (PR), e ajudo empresas a terem sites que funcionam tão bem quanto parecem.",
+      "Já criei sites em WordPress para negócios de diferentes áreas nos Estados Unidos, como saúde, climatização e serviços locais. Em cada projeto, cuido de tudo de ponta a ponta: entendo o que você precisa, construo as páginas e acompanho até a entrega.",
+      "Quer tirar uma ideia do papel? Veja alguns dos meus projetos e me chame para conversarmos.",
     ],
     en: [
-      "I'm Gabriel Hansen, and I'll be with you through the whole process, from start to finish.",
-      "I currently work as a WordPress and PHP Developer, and my role is to take your idea off paper and put it online. I believe in projects that stand out from the ordinary. A good website isn't just pretty — it works, converts, and represents who you are.",
-      "My work speaks for itself. Take a moment to check out some of the projects I've already delivered.",
+      "I'm Gabriel Hansen, a web developer from Guarapuava, Brazil, and I help businesses get websites that work as well as they look.",
+      "I've built WordPress websites for businesses across different industries in the United States, including healthcare, HVAC and local services. On every project, I handle everything end to end: I understand what you need, build the pages and follow through to delivery.",
+      "Have an idea you want to bring to life? Take a look at some of my projects and get in touch so we can talk.",
     ],
   },
   location: {
@@ -277,19 +277,19 @@ export const experiences: Experience[] = [
     id: "experiencia-01",
     role: { pt: "Wordpress | PHP Developer", en: "WordPress | PHP Developer" },
     organization: "WorkHero",
-    period: { pt: "02/2026 — Atual", en: "02/2026 — Present" },
+    period: { pt: "02/2026 — 10/2026", en: "02/2026 — 10/2026" },
     description: {
-      pt: "Atuo no desenvolvimento e suporte de sites em WordPress, cuidando de cada demanda de ponta a ponta: entendo o que é preciso, construo as páginas e acompanho tudo até a entrega final. Trabalho com os principais construtores da plataforma, como Elementor, Divi e Beaver Builder.",
-      en: "I develop and support WordPress websites, handling every request end to end: I understand what's needed, build the pages, and follow through to final delivery. I work with the platform's main page builders, such as Elementor, Divi and Beaver Builder.",
+      pt: "Atuei no desenvolvimento e suporte de sites em WordPress, cuidando de cada demanda de ponta a ponta: entendia o que era preciso, construía as páginas e acompanhava tudo até a entrega final. Trabalhei com os principais construtores da plataforma, como Elementor, Divi e Beaver Builder.",
+      en: "I developed and supported WordPress websites, handling every request end to end: I understood what was needed, built the pages, and followed through to final delivery. I worked with the platform's main page builders, such as Elementor, Divi and Beaver Builder.",
     },
     highlights: {
       pt: [
-        "Criação e manutenção de páginas em WordPress com Elementor, Divi e Beaver Builder",
-        "Suporte contínuo e melhorias em sites já publicados",
+        "Criei e mantive páginas em WordPress com Elementor, Divi e Beaver Builder",
+        "Prestei suporte contínuo e implementei melhorias em sites já publicados",
       ],
       en: [
-        "Building and maintaining WordPress pages with Elementor, Divi and Beaver Builder",
-        "Ongoing support and improvements on already published sites",
+        "Built and maintained WordPress pages with Elementor, Divi and Beaver Builder",
+        "Provided ongoing support and made improvements on already published sites",
       ],
     },
   },
